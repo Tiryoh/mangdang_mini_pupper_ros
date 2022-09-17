@@ -1,14 +1,15 @@
-# Mini Pupper ROS Packages
+# Mini Pupper ROS Repository
 
-ROS packages for Mini Pupper.
+![Mini Pupper reMARS event](imgs/reMARS.jpg)
+Mini Pupper workshop at Amazon reMARS2022 event, JUNE 21 – 24, 2022 | LAS VEGAS, NV
 
-![Mini Pupper CC Max Morse](imgs/1.jpg)
+![Mini Pupper Navigation](imgs/Nav.gif)
+Mini Pupper Navigation Demo with Lidar
 
-Mini Pupper is an open source dog-shaped 12-DOF quadruped robot,supporting ROS (Robot Operating System). With ROS, you can explore SLAM and Navigation functions with Mini Pupper. The controller of Mini Pupper's ROS packages is based on [champ](https://github.com/chvmp/champ) project, and we made some changes to SLAM and Navigation functions.
+Mini Pupper is an open source 12-DOF quadruped robot,supporting ROS (Robot Operating System). With ROS, you can explore SLAM and Navigation functions with Mini Pupper. The controller of Mini Pupper's ROS packages is based on [champ](https://github.com/chvmp/champ) project, and we made some changes to SLAM and Navigation functions.
 
 Tested on
 * Ubuntu 20.04 (ROS Noetic)
-* Ubuntu 18.04 (ROS Melodic).
 
 ## 1.Installation Guide
 We recommend you explore Mini Pupper with ROS network, make sure your PC and Mini Pupper have connected to the same WiFi.
@@ -71,9 +72,10 @@ export ROS_HOSTNAME=192.168.1.106
 
 #### 1.2.1 Hardware Dependencies
 You should first install dependencies of servos, battery moniter and display screen. </br>
-See [minipupper_ros_bsp](https://github.com/mangdangroboticsclub/minipupper_ros_bsp).
-#### 1.2.2 PS4 Joystick interface installation
-PS4 Joystick interface in ROS is based on [ps4-ros](https://github.com/solbach/ps4-ros) project. 
+See [minipupper-bsp](https://github.com/mangdangroboticsclub/minipupper-bsp).
+
+#### 1.2.2 Controller Joystick interface installation
+PS4 Joystick interface in ROS is based on [Controller-ROS](https://github.com/solbach/ps4-ros) project. 
 ```sh
 pip install ds4drv
 sudo apt install ros-noetic-joy
@@ -98,13 +100,27 @@ sudo chmod a+rw /dev/input/jsX
 
 ```sh
 cd <your_ws>/src
-git clone --recursive https://github.com/mangdangroboticsclub/minipupper_ros
-cd minipupper_ros/champ
+git clone --recursive https://github.com/mangdangroboticsclub/minipupper_ros.git
+```
+
+Install Champ repo, you can also refer to the [champ](https://github.com/chvmp/champ) readme.
+
+```sh
+cd minipupper_ros/mini_pupper_third_parties/
+sudo apt install -y python-rosdep
+
+git clone --recursive https://github.com/chvmp/champ
+git clone https://github.com/chvmp/champ_teleop
+git clone https://github.com/chvmp/yocs_velocity_smoother
+
 # it's not recommend to compile gazebo on raspberry pi
+cd champ
 sudo rm -rf champ_gazebo
-cd ..
-cd ..
-cd ..
+mv -f ../bringup.launch champ_bringup/launch/
+
+cd ../..
+sudo rm -rf mini_pupper_gazebo
+cd ../..
 rosdep install --from-paths src --ignore-src -r -y
 catkin_make
 source <your_ws>/devel/setup.bash
@@ -142,7 +158,7 @@ Make sure Mini Pupper looks like this after calibrating.
 #### 2.2.1 Run the base driver
 **You should run this command on Mini Pupper**
 ```sh
-roslaunch mini_pupper bringup.launch
+roslaunch mini_pupper_bringup bringup.launch
 ```
 If Mini Pupper didn't stand as what you expect, you can edit calibration.yaml in servo_interface/config/calibration to fix the angles.
 #### 2.2.2 Control Mini Pupper
@@ -175,15 +191,17 @@ Then you can go into pairing mode with PS4: Playstation button + share button fo
 ### 2.3 SLAM
 #### 2.3.1 Run the base driver
 **You should run this command on Mini Pupper**
+
 ```sh
-roslaunch mini_pupper bringup.launch
+roslaunch mini_pupper_bringup bringup.launch
 ```
 
 #### 2.3.2 Run Cartographer
 **You should run this command on PC**
-**If you are using gazebo, set the param /use_sim_time to true in the launch file.**
+**Notice: If you are using gazebo, set the param /use_sim_time in navigate.launch as true.**
+
 ```sh
-roslaunch mini_pupper slam.launch
+roslaunch mini_pupper_navigation slam.launch
 ```
 Then you can use keyboard or joystick to control your Mini Pupper walking around and creating a map. To save the map, run these commands below.
 ```sh
@@ -202,7 +220,7 @@ Then, copy map.pbstream, map.pgm and map.yaml files you just saved to <your_ws>/
 #### 2.4.1 Change the map file
 Before running navigation, you should first change the launch file with the map you created. 
 ```sh
-roscd mini_pupper/launch
+roscd mini_pupper_navigation/launch
 sudo gedit navigate.launch
 ```
 Then change arg of the map_file and pbstream_file.
@@ -211,30 +229,22 @@ Then change arg of the map_file and pbstream_file.
 #### 2.4.2 Run the base driver
 **You should run this command on Mini Pupper**
 ```sh
-roslaunch mini_pupper bringup.launch
+roslaunch mini_pupper_bringup bringup.launch
 ```
 
 #### 2.4.3 Run Cartographer(for localization) and Move_Base
 **You should run this command on PC**
-**If you are using gazebo, set the param /use_sim_time to true in the launch file.**
+**Notice: If you are using gazebo, set the param /use_sim_time in navigate.launch as true.**
+
 ```sh
-roslaunch mini_pupper navigate.launch
+roslaunch mini_pupper_navigation navigate.launch
 ```
 
 ## 3.Simulation
 You can also play with Mini Pupper with only your laptop.</br>
 ![nav](imgs/instruction.gif)
 ```sh
-roslaunch mini_pupper gazebo.launch
-```
-
-## 4.LCD Screen
-```sh
-python3 ~/minipupper_ros_bsp/mangdang/LCD/demo.py
-```
-We also made s simple ROS interface of the LCD screen, which subscribes sensor_msgs/Image.
-```sh
-rosrun display_interface display_interface.py
+roslaunch mini_pupper_gazebo gazebo.launch
 ```
 
 ## 4.Computer Vision
@@ -244,7 +254,7 @@ You can follow these commands to try this demo(make sure you have connected OAK-
 
 ```sh
 # Terminal 1
-roslaunch mini_pupper bringup.launch
+roslaunch mini_pupper_bringup bringup.launch
  
 # Terminal 2
 roslaunch depthai_examples mobile_publisher.launch
@@ -252,13 +262,10 @@ roslaunch depthai_examples mobile_publisher.launch
 # Terminal 3
 rosrun mini_pupper_detect oak_detect.py
 ```
-</br>
 
-Just use a bottle to let Mini Pupper look at you :)</br>
-(Here's the cool guy who launched this demo successfully.)</br>
-[https://www.techlife-hacking.com/?p=1197](https://www.techlife-hacking.com/?p=1197)</br>
-![obj](imgs/obj.gif)
-</br>
+![Mini Pupper OpenCV Object Detection](imgs/OpenCV.ObjDetect.gif)
+Mini Pupper OpenCV Object Detection Demo
+
 Also, if you want to do some CV projects, you can add a usb camera on Mini Pupper, and subscribe the comressed image on your PC.</br>
 The transportation of raw image through network will be too slow, you may need to use image_transport to turn the compressed image to normal image and then use it.
 
