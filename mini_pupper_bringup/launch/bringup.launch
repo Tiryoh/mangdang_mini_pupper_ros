@@ -45,6 +45,6 @@
         <!-- <rosparam file="$(find mini_pupper_control)/config/calibration.yaml" command="load"/> -->
         <include file="$(find mini_pupper_control)/launch/servo_interface.launch"/>
         <!--include file="$(find mini_pupper_teleop)/launch/ps4_interface.launch"/-->
-        <include file="$(find ldlidar)/launch/ld06.launch"/>
+        <include file="$(find mini_pupper_bringup)/launch/ld06_bringup.launch"/>
     </group>
 </launch>
