@@ -1,10 +1,14 @@
 <launch>
     <arg name="robot_name"             default="/" />
     <arg name="base_frame"             default="base_link" />
-    <arg name="joints_map_file"        default="$(find champ_config)/config/joints/joints.yaml"/>
-    <arg name="links_map_file"         default="$(find champ_config)/config/links/links.yaml"/>
-    <arg name="gait_config_file"       default="$(find champ_config)/config/gait/gait.yaml"/>
-    <arg name="description_file"       default="$(find champ_description)/urdf/champ.urdf"/>
+    <!-- <arg name="joints_map_file"        default="$(find champ_config)/config/joints/joints.yaml"/> -->
+    <!-- <arg name="links_map_file"         default="$(find champ_config)/config/links/links.yaml"/> -->
+    <!-- <arg name="gait_config_file"       default="$(find champ_config)/config/gait/gait.yaml"/> -->
+    <!-- <arg name="description_file"       default="$(find champ_description)/urdf/champ.urdf"/> -->
+    <arg name="joints_map_file"        default="$(find mini_pupper_control)/config/joints.yaml"/> <!--Path to list of joint names. Do not touch this. -->
+    <arg name="links_map_file"         default="$(find mini_pupper_control)/config/links.yaml"/> <!-- Path to list of link names. Do not touch this. -->
+    <arg name="gait_config_file"       default="$(find mini_pupper_control)/config/gait.yaml"/>  <!-- Path to gait parameters. Do not touch this. -->
+    <arg name="description_file"       default="$(find mini_pupper_description)/urdf/mini_pupper_description.urdf"/> <!-- Path to URDF file Do not touch this. -->
     <arg name="gazebo"                 default="false" />
     <arg name="rviz"                   default="false" />
     <arg name="rviz_ref_frame"         default="odom"/>

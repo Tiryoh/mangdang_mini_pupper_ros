@@ -43,16 +43,26 @@ source install_isolated/setup.bash
 ```
 #### 1.1.2 Mini Pupper ROS packages installation
 
-This should be done in a workspace *outside* of the `carto_ws` workspace, like `catkin_ws`.
+This should be done in a workspace *outside* of the `carto_ws` workspace, like `catkin_ws`.  
+Download the Mini Pupper ROS package in the workspace.
 
 ```sh
 cd $YOUR_WS/src
 git clone -b ros1 https://github.com/mangdangroboticsclub/minipupper_ros.git
-cd ..
-# Ignore hardware specific repository
-touch src/minipupper_ros/mini_pupper_bringup/CATKIN_IGNORE
-touch src/minipupper_ros/mini_pupper_control/CATKIN_IGNORE
-rosdep install --from-paths src --ignore-src -r -y
+```
+
+Download Champ repo, you can also refer to the [champ](https://github.com/chvmp/champ) README.
+**Then you can install the ROS packages for Mini Pupper.**
+
+```sh
+cd $YOUR_WS/src
+vcs import < minipupper_ros/.minipupper.repos --recursive
+```
+
+Build and install all ROS packages.
+
+```sh
+rosdep install --from-paths . --ignore-src -r -y
 catkin_make
 source $YOUR_WS/devel/setup.bash
 ```
@@ -67,9 +77,9 @@ ifconfig
 Open the file and update ROS IP settings with commands below.
 
 ```sh
-sudo gedit ~/.bashrc
+gedit ~/.bashrc
 ```
-Then add your Master and hostname config.
+Then add your ROS_MASTER_URI and ip address config.
 
 ![ROS_IP](imgs/ROS_IP_1.png)
 
@@ -77,7 +87,7 @@ For example:
 
 ```sh
 export ROS_MASTER_URI=http://192.168.1.106:11311
-export ROS_HOSTNAME=192.168.1.106
+export ROS_IP=192.168.1.106
 ```
 
 
@@ -124,7 +134,7 @@ Install the build tools first.
 sudo apt install -y python3-vcstool python3-rosdep
 ```
 
-Download the Mini Pupper ROS package.
+Download the Mini Pupper ROS package in the workspace, like `catkin_ws`.
 
 ```sh
 cd $YOUR_WS/src
@@ -136,7 +146,7 @@ Download Champ repo, you can also refer to the [champ](https://github.com/chvmp/
 
 ```sh
 cd $YOUR_WS/src
-vcs import < minipupper_ros/.minipupper.repos
+vcs import < minipupper_ros/.minipupper.repos --recursive
 
 # it's not recommend to compile gazebo and cartographer on raspberry pi
 touch champ/champ/champ_gazebo/CATKIN_IGNORE
@@ -153,6 +163,7 @@ source $YOUR_WS/devel/setup.bash
 ```
 
 #### 1.2.4 Network Setup
+
 Connect your PC and Mini Pupper to the same WiFi and find the assigned IP address with commands below.
 
 ```sh
@@ -162,18 +173,20 @@ ifconfig
 Open the file and update the ROS IP settings with the command below.
 
 ```sh
-sudo gedit ~/.bashrc
+nano ~/.bashrc
 ```
-Then add your Master and hostname config.
+Then add your ROS_MASTER_URI and ip address config.
 
 ![ROS_IP](imgs/ROS_IP_2.png)
 
-For example
+For example:
 
 ```sh
 export ROS_MASTER_URI=http://192.168.1.106:11311
-export ROS_HOSTNAME=192.168.1.107
+export ROS_IP=192.168.1.107
 ```
+
+After editing, input Ctrl+X to save and exit the nano editor.
 
 ## 2.Quick Start Guide
 ### 2.1 Calibration
@@ -182,21 +195,21 @@ Through this script, you can calibrate the angle of every servo in one turn. Jus
 The hip and shank should be horizontal, and the ham should be vertical.
 
 ```sh
-roslaunch servo_interface calibrate.launch
+roslaunch mini_pupper_control calibrate.launch
 ```
 
 Make sure Mini Pupper looks like this after calibrating.
 
 ![calibrtaion](imgs/calibration.jpg)
+
 ### 2.2 Walking
 #### 2.2.1 Run the base driver
+
 **You should run this command on Mini Pupper**
 
 ```sh
 roslaunch mini_pupper_bringup bringup.launch
 ```
-
-If Mini Pupper didn't stand as what you expect, you can edit calibration.yaml in servo_interface/config/calibration to fix the angles.
 
 #### 2.2.2 Control Mini Pupper
 
@@ -297,9 +310,7 @@ You can also play with Mini Pupper with only your laptop.
 
 ![nav](imgs/instruction.gif)
 
-```sh
-roslaunch mini_pupper_gazebo gazebo.launch
-```
+See the [README in mini_pupper_gazebo](./mini_pupper_gazebo/README.md).
 
 ## 4.Computer Vision
 

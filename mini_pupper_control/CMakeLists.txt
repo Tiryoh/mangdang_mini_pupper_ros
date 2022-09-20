@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(display_interface)
+project(mini_pupper_control)
 
 find_package(catkin REQUIRED COMPONENTS 
   cv_bridge
