@@ -11,8 +11,8 @@ servo_pins = [15,14,13,   12,11,10,   9,8,7,   6,5,4] #rf lf rb lb
 def set_servo_angle(pin,angle):
     duty_cycle = int(500000+11111.11111*angle)
     servo_pin = "/sys/class/pwm/pwmchip0/pwm"+str(pin)+"/duty_cycle"
-    f = open(servo_pin, "w")
-    f.write(str(int(duty_cycle)))
+    with open(servo_pin, "w") as f:
+        f.write(str(int(duty_cycle)))
 
 if __name__=='__main__':
     rospy.init_node('servo_calibration',anonymous=True)
@@ -36,7 +36,7 @@ if __name__=='__main__':
         i = i + 1
         print(calibrated_angles)
     print("calibration done!")
-    calibration_path = '/sys/bus/i2c/devices/3-0050/eeprom'
+    calibration_path = '/sys/bus/nvmem/devices/3-00500/nvmem'
     #open(calibration_path, 'w').close()
     #with open(calibration_path, 'w') as eeprom:
     #    eeprom.truncate(0)

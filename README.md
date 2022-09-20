@@ -94,17 +94,21 @@ export ROS_IP=192.168.1.106
 ### 1.2 Mini Pupper Setup
 **Mini Pupper Setup corresponds to the Raspberry Pi on your Mini Pupper.**
 
-#### 1.2.1 Hardware Dependencies
+#### 1.2.1 Hardware Dependencies and ROS
 
 You should first install dependencies of servos, battery moniter and display screen.  
 See [minipupper-bsp](https://github.com/mangdangroboticsclub/minipupper-bsp).
+
+Install ROS Noetic ROS-Base (No GUI) by following the page below.
+
+https://wiki.ros.org/noetic/Installation/Ubuntu
 
 #### 1.2.2 Controller Joystick interface installation
 
 PS4 Joystick interface in ROS is based on [Controller-ROS](https://github.com/solbach/ps4-ros) project.
 
 ```sh
-python3 -m pip install ds4drv
+sudo -H python3 -m pip install ds4drv
 sudo apt install ros-noetic-joy
 sudo wget https://raw.githubusercontent.com/chrippa/ds4drv/master/udev/50-ds4drv.rules -O /etc/udev/rules.d/50-ds4drv.rules
 sudo udevadm control --reload-rules
@@ -134,10 +138,10 @@ Install the build tools first.
 sudo apt install -y python3-vcstool python3-rosdep
 ```
 
-Download the Mini Pupper ROS package in the workspace, like `catkin_ws`.
+Download the Mini Pupper ROS package in the workspace, `catkin_ws`.
 
 ```sh
-cd $YOUR_WS/src
+cd ~/catkin_ws/src
 git clone -b ros1 https://github.com/mangdangroboticsclub/minipupper_ros.git
 ```
 
@@ -145,11 +149,13 @@ Download Champ repo, you can also refer to the [champ](https://github.com/chvmp/
 **Then you can install the ROS packages for Mini Pupper.**
 
 ```sh
-cd $YOUR_WS/src
+cd ~/catkin_ws/src
 vcs import < minipupper_ros/.minipupper.repos --recursive
 
 # it's not recommend to compile gazebo and cartographer on raspberry pi
+touch champ/champ/champ_description/CATKIN_IGNORE
 touch champ/champ/champ_gazebo/CATKIN_IGNORE
+touch champ/champ/champ_navigation/CATKIN_IGNORE
 touch minipupper_ros/mini_pupper_gazebo/CATKIN_IGNORE
 touch minipupper_ros/mini_pupper_navigation/CATKIN_IGNORE
 ```
@@ -157,9 +163,11 @@ touch minipupper_ros/mini_pupper_navigation/CATKIN_IGNORE
 Build and install all ROS packages.
 
 ```sh
-rosdep install --from-paths . --ignore-src -r -y
+# install dependencies without unused heavy packages
+rosdep install --from-paths . --ignore-src -r -y --skip-keys=joint_state_publisher_gui --skip-keys=octomap_server
+cd ~/catkin_ws
 catkin_make
-source $YOUR_WS/devel/setup.bash
+source ~/catkin_ws/devel/setup.bash
 ```
 
 #### 1.2.4 Network Setup
