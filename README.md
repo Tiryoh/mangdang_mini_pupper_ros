@@ -308,3 +308,7 @@ Mini Pupper OpenCV Object Detection Demo
 ![Mini Pupper OpenCV Object Detection](imgs/OpenCV.ObjDetect.gif)
 
 See the [README in mini_pupper_examples](./mini_pupper_examples/README.md).
+
+## Notices
+
+This project includes open source software. See [NOTICES.md](./NOTICES.md) for details.
