@@ -28,5 +28,5 @@
   </node>
 
   <node pkg="tf" type="static_transform_publisher" name="base_link_to_ld06"
-    args="0 0 0 1.57 0 0 /lidar /lidar_frame 100" if="$(arg fix_to_lidar_link)" />
+    args="0 0 0 1.57 0 0 /lidar /lidar_frame 1" if="$(arg fix_to_lidar_link)" />
 </launch>

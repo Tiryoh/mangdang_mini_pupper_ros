@@ -237,7 +237,7 @@ There are two options to control Mini Pupper:
 **It's recommended to run this command on PC.**
 
 ```sh
-roslaunch champ_teleop teleop.launch
+roslaunch mini_pupper_teleop teleop.launch
 ```
 
 2.Using PS4 joystick

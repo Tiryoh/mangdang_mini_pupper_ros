@@ -5,7 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded: ~
       Splitter Ratio: 0.6006709933280945
-    Tree Height: 719
+    Tree Height: 725
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -99,6 +99,8 @@ Visualization Manager:
           Value: false
         lidar:
           Value: false
+        lidar_frame:
+          Value: true
         lpb1:
           Value: false
         lpb2:
@@ -183,7 +185,8 @@ Visualization Manager:
                   lpf1:
                     {}
                 lidar:
-                  {}
+                  lidar_frame:
+                    {}
                 rb1:
                   rb2:
                     rb3:
@@ -218,7 +221,7 @@ Visualization Manager:
         All: true
         All Submap Pose Markers: true
         Trajectory 0:
-          0.2: true
+          0.9: true
           Submap Pose Markers: true
           Value: true
       Topic: /submap_list
@@ -278,6 +281,202 @@ Visualization Manager:
         Intra residuals: true
       Queue Size: 100
       Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_infra1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_infra1_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_infra2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_infra2_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lb1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lb2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lb3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lbfoot:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lf1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lf2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lf3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lffoot:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lidar:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lpb1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lpb2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lpf1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lpf2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rb1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rb2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rb3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rbfoot:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rf1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rf2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rf3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rffoot:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rpb1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rpb2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rpf1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rpf2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        yellow_plate:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 100; 100; 100
@@ -306,7 +505,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 16.527223587036133
+      Distance: 7.566596031188965
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -314,17 +513,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -0.18141746520996094
+        Y: 0.0873556137084961
+        Z: 2.384185791015625e-07
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8403981328010559
+      Pitch: 0.7053979635238647
       Target Frame: <Fixed Frame>
-      Yaw: 2.6604042053222656
+      Yaw: 4.055408954620361
     Saved: ~
 Window Geometry:
   Displays:
@@ -332,7 +531,7 @@ Window Geometry:
   Height: 1016
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001c50000035afc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000035a000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000035afc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d0000035a000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007380000003efc0100000002fb0000000800540069006d0065010000000000000738000002eb00fffffffb0000000800540069006d00650100000000000004500000000000000000000004580000035a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001c50000035efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b0000035e000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000035efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003b0000035e000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007380000003efc0100000002fb0000000800540069006d00650100000000000007380000024400fffffffb0000000800540069006d00650100000000000004500000000000000000000004580000035e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
