@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(mini_pupper_bringup)
+project(mini_pupper_champ)
 
 find_package(ament_cmake REQUIRED)
 

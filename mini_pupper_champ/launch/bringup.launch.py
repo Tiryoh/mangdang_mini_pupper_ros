@@ -54,12 +54,6 @@ def generate_launch_description():
     rviz_config_path = PathJoinSubstitution(
         [description_package, 'rviz', 'urdf_viewer.rviz']
     )
-    servo_interface_launch_path = PathJoinSubstitution(
-        [FindPackageShare('mini_pupper_driver'), 'launch', 'servo_interface.launch.py']
-    )
-    lidar_launch_path = PathJoinSubstitution(
-        [FindPackageShare('mini_pupper_bringup'), 'launch', 'lidar.launch.py']
-    )
 
     robot_name = LaunchConfiguration("robot_name")
     sim = LaunchConfiguration("sim")
@@ -117,16 +111,6 @@ def generate_launch_description():
         }.items(),
     )
 
-    servo_interface_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(servo_interface_launch_path),
-        condition=IfCondition(joint_hardware_connected),
-    )
-
-    lidar_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(lidar_launch_path),
-        condition=IfCondition(joint_hardware_connected),
-    )
-
     return LaunchDescription([
         declare_robot_name,
         declare_sim,
@@ -134,6 +118,4 @@ def generate_launch_description():
         declare_hardware_connected,
         rviz2_node,
         bringup_launch,
-        servo_interface_launch,
-        lidar_launch,
     ])

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>mini_pupper_bringup</name>
+  <name>mini_pupper_champ</name>
   <version>0.1.0</version>
   <description>Mini Pupper Bringup Package</description>
   <maintainer email="fae@mangdang.net">MangDang</maintainer>

@@ -34,7 +34,7 @@ from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
     gazebo_package = get_package_share_directory('mini_pupper_gazebo')
-    bringup_package = get_package_share_directory('mini_pupper_bringup')
+    bringup_package = get_package_share_directory('mini_pupper_champ')
     description_package = get_package_share_directory('mini_pupper_description')
 
     joints_config_path = os.path.join(
@@ -117,7 +117,7 @@ def generate_launch_description():
         description='Set to true if connected to a physical robot'
     )
 
-    mini_pupper_bringup_launch = IncludeLaunchDescription(
+    mini_pupper_champ_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(bringup_launch_path),
         launch_arguments={
             "use_sim_time": sim,
@@ -163,6 +163,6 @@ def generate_launch_description():
         declare_world_init_heading,
         declare_sim,
         declare_joint_hardware_connected,
-        mini_pupper_bringup_launch,
+        mini_pupper_champ_launch,
         champ_gazebo_launch
     ])
