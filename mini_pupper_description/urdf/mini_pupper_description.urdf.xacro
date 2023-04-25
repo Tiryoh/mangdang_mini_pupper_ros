@@ -1785,7 +1785,7 @@
     </plugin>
   </gazebo>
   
-  <link name="imu_link">
+  <link name="imu">
     <inertial>
       <mass value="0.0001"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -1795,10 +1795,10 @@
 
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
-    <child link="imu_link"/>
+    <child link="imu"/>
   </joint>
 
-  <gazebo reference="imu_link">
+  <gazebo reference="imu">
     <sensor name="imu_controller" type="imu">
       <always_on>true</always_on>
       <update_rate>50</update_rate>
